@@ -1,6 +1,6 @@
 import React from "react";
 
-const TopRated = ({ message, children }) => {
+const TopRated = () => {
   return (
     <div>
       <div className="card col-4">
