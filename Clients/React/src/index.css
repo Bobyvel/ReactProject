@@ -27,7 +27,7 @@ body {
 }
 
 a {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
 }
 
@@ -36,30 +36,32 @@ img {
     height: auto;
     margin: 0 auto;
 }
-
+nav{
+   text-align: right;
+    
+}
 nav.navbar-menu {    
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgb(88, 182, 92);
+    
+    background-color: grey;
 }
 .active{
-    background-color:#ff6a00;
+    color: black;
+    background-color: wheat;
     }
 nav.navbar-menu a {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     text-decoration: none;
     color: white;    
-    width: 15%;
-    align-items: center;
-    padding: 20px 10px;
-    border: 1px solid rgb(88, 182, 92);
+    width: 8%;
+    align-items: flex-end;
+    padding: 10px;
+    
 }
 
 nav.navbar-menu a:hover {
-    color: rgb(88, 182, 92);
+    color: grey;
     background-color: white;
 }
 

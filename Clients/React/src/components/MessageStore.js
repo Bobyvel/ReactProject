@@ -3,7 +3,7 @@ import React from "react";
 const MessageStore = ({ message, children }) => {
   return (
     <div className="welcome">
-      <h1>{message}</h1>
+      <h1>{message.text}</h1>
       <p>{children}</p>
     </div>
   );

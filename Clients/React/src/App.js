@@ -1,15 +1,22 @@
 import React, { Component, Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./views/Home";
-import Login from "./views/Login";
-import Register from "./views/Register";
-import NotFound from "./views/NotFound";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Home from "././components/Home/Home";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import NotFound from "./components/NotFound/NotFound";
+import Header from "./components/common/Header";
+import Footer from "./components/common/Footer";
 
 
 
 class App extends Component {
+
+  logout () {
+    this.setState({ loggedIn: false })
+    this.props.logout()
+    //toastr.success('Logout successful')
+    this.props.history.push('/login')
+  }
   render() {
     return (
       <div>
@@ -18,8 +25,8 @@ class App extends Component {
             <Header />
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path="/login" exact component={Login} />
-              <Route path="/register" exact component={Register} />
+              <Route path="/signin" exact component={Login} />
+              <Route path="/signup" exact component={Register} />
               <Route component={NotFound} />
             </Switch>
             <Footer/>
