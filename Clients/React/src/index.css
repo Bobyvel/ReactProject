@@ -1,18 +1,3 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-@import url('https://fonts.googleapis.com/css?family=Montserrat');
 *{
     box-sizing: border-box;
 }
@@ -23,7 +8,7 @@ code {
 body {
     margin: 0;
     padding: 0;
-    font: 16px/1.5 'Montserrat', sans-serif;    
+    font-family: "Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";    
 }
 
 a {
@@ -36,39 +21,62 @@ img {
     height: auto;
     margin: 0 auto;
 }
-nav{
-   text-align: right;
-    
+
+header {
+    height: 400px;
+    background-attachment: fixed;
+    background-color: silver;
+}
+
+div.banner{
+    width: 30%;
+    margin-left: 4em;
+    margin-right: 4em;
+    padding: 2em 0;
+    text-align: left;
+
+}
+
+div.banner p{
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 3em;
+    font-weight: bold;
+    justify-content: left;
 }
 nav.navbar-menu {    
     display: flex;
-    
-    background-color: grey;
+    flex-wrap: wrap;
+    justify-content: right;
+    align-items: center;
+    background-color: none;
 }
-.active{
-    color: black;
-    background-color: wheat;
-    }
+
 nav.navbar-menu a {
     display: flex;
-    justify-content: center;
+    align-content: right;
     text-decoration: none;
-    color: white;    
-    width: 8%;
-    align-items: flex-end;
-    padding: 10px;
+    color: black;    
+    align-items: center;
+    padding: 20px 40px;
     
 }
 
 nav.navbar-menu a:hover {
-    color: grey;
-    background-color: white;
+    color: rgb(196, 140, 19);
+    
+    
 }
+
+nav.navbar-menu a.logo{
+    margin-right: 50px;
+}
+
 
 div.welcome-wrapper {
     width: 70%;
     margin: 0 auto;
-    padding: 3em 0;
+    padding: 1em 0;
     text-align: center;
    
 
@@ -162,11 +170,10 @@ div.welcome p {
 }
 
 footer {
-    position: fixed;
     width: 100%;
     bottom: 0;
     text-align: center;
-    background-color: rgb(88, 182, 92);
+    background-color: silver;
     padding: 10px 0;
     font-size: 18px;
     font-weight: bold;

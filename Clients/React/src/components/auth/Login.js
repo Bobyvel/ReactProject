@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import toastr from "toastr";
+import loginValidator from "../../utils/loginValidator";
 import { login } from "../../api/remote";
-import { Redirect } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -14,18 +15,32 @@ class Login extends Component {
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
   }
+
   onChangeHandler(e) {
     this.setState({ [e.target.name]: e.target.value });
+    
   }
   async onSubmitHandler(e) {
     e.preventDefault();
-    const res = await login(this.state.email, this.state.password);
-    localStorage.setItem("authToken", res.token);
-    localStorage.setItem("username", res.user.username);
-    if (res.user.roles.indexOf("Admin") !== -1) {
-      localStorage.setItem("role", res.user.roles);
+
+    const isValid = loginValidator(this.state.email, this.state.password);
+    if (isValid) {
+      try{
+      const res = await login(this.state.email, this.state.password);
+      console.log(res)
+      localStorage.setItem("authToken", res.token);
+      localStorage.setItem("username", res.user.username);
+      if (res.user.roles.indexOf("Admin") !== -1) {
+        localStorage.setItem("role", res.user.roles);
+      }
+      toastr.success("Login successful");
+      this.props.history.push("/");
+      }
+      catch(e){
+        toastr.error(e)
+      }
+      
     }
-    this.props.history.push("/");
   }
 
   render() {

@@ -1,3 +1,5 @@
+import toastr from "toastr";
+
 const host = 'http://localhost:5000/'
 
 async function register (username, email, password) {
@@ -30,7 +32,12 @@ async function login (email, password) {
     return res.json()
   }
   
+  function logout() {
+    localStorage.clear();
+    toastr.success('Logout successful')
+   
+  }
 
 export {
-    register, login
+    register, login, logout
 }

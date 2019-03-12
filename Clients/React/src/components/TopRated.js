@@ -2,7 +2,7 @@ import React from "react";
 
 const TopRated = () => {
   return (
-    <div>
+    <div className="card-deck space-top">
       <div className="card col-4">
         <img
           className="card-img-top card-image"

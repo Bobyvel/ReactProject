@@ -1,5 +1,7 @@
 import React from "react";
-import {register, login} from "../../api/remote";
+import toastr from "toastr";
+import registerValidator from "../../utils/registerValidator";
+import { register, login } from "../../api/remote";
 
 class Register extends React.Component {
   constructor(props) {
@@ -22,21 +24,29 @@ class Register extends React.Component {
 
   async onSubmitHandler(e) {
     e.preventDefault();
-    const res = await register(
-      this.state.username,
+    console.log(this.state.email)
+    const isValid = registerValidator(
       this.state.email,
-      this.state.password
+      this.state.username,
+      this.state.password,
+      this.state.confirmPassword
     );
-    console.log(res)
-    if(res.success){
-      const res = await login( this.state.email,
-        this.state.password)
-        console.log(res)
-        localStorage.setItem('authToken', res.token)
-        localStorage.setItem('username', res.user.username)
-        
+    if (isValid) {
+      const res = await register(
+        this.state.username,
+        this.state.email,
+        this.state.password
+      );
+      toastr.success("Register successful");
+      console.log(res);
+      if (res.success) {
+        const res = await login(this.state.email, this.state.password);
+        console.log(res);
+        localStorage.setItem("authToken", res.token);
+        localStorage.setItem("username", res.user.username);
+        this.props.history.push("/");
+      }
     }
-    
   }
 
   render() {

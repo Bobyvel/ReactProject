@@ -7,16 +7,9 @@ import NotFound from "./components/NotFound/NotFound";
 import Header from "./components/common/Header";
 import Footer from "./components/common/Footer";
 
-
-
 class App extends Component {
-
-  logout () {
-    this.setState({ loggedIn: false })
-    this.props.logout()
-    //toastr.success('Logout successful')
-    this.props.history.push('/login')
-  }
+  
+  
   render() {
     return (
       <div>
@@ -26,10 +19,10 @@ class App extends Component {
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/signin" exact component={Login} />
-              <Route path="/signup" exact component={Register} />
+              <Route path="/register" exact component={Register} />
               <Route component={NotFound} />
             </Switch>
-            <Footer/>
+            <Footer />
           </Fragment>
         </Router>
       </div>
