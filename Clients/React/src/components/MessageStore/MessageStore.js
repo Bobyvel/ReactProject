@@ -1,6 +1,6 @@
 import React from "react";
 
-const MessageStore = ({ message, children }) => {
+export const MessageStore = ({ message, children }) => {
   return (
     <div className="welcome">
       <h1>{message.text}</h1>
@@ -9,4 +9,4 @@ const MessageStore = ({ message, children }) => {
   );
 };
 
-export default MessageStore;
+

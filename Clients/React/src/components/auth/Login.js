@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import toastr from "toastr";
 import loginValidator from "../../utils/loginValidator";
-import { login } from "../../api/remote";
+import { login } from "../../services/authService";
 
 class Login extends Component {
   constructor(props) {

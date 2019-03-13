@@ -1,7 +1,7 @@
 import React from "react";
 import toastr from "toastr";
 import registerValidator from "../../utils/registerValidator";
-import { register, login } from "../../api/remote";
+import { register, login } from "../../services/authService";
 
 class Register extends React.Component {
   constructor(props) {
