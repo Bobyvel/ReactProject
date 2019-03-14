@@ -38,11 +38,6 @@ async function login (email, password) {
    
   }
 
-  async function fetchProducts () {
-    const res = await window.fetch(host + 'book/all')
-    return res.json()
-  }
-
-export {
-    register, login, logout, fetchProducts
+  export {
+    register, login, logout
 }

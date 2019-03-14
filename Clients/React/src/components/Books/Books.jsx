@@ -23,15 +23,20 @@ class Books extends Component {
   }
 
   async onDeleteButtonClick (e) {
-    const res = await deleteBook(e.target.value);
-    if (res.success) {
+    const bookID = e.target.value;
+    const res = await deleteBook(bookID);
+    if(res.success){
       toastr.success("Book is deleted");
+      this.props.storeHasChanged(bookID);
       this.props.history.push("/store");
+    }else{
+      toastr.error(res.message);
     }
-    
+        
   }
 
   render() {
+    
     const books = this.props.books;
 
     return (

@@ -11,6 +11,7 @@ class Store extends Component {
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
+    
   }
 
   onChangeHandler(e) {
@@ -28,7 +29,7 @@ class Store extends Component {
   render() {
     let { books } = this.props;
     books = books.sort((a, b) => a.title.localeCompare(b.title));
-    console.log(this.state.query);
+
     if (this.state.hasSearch) {
       books = books.filter(t =>
         t.title.toLowerCase().includes(this.state.query.toLowerCase())
@@ -55,7 +56,7 @@ class Store extends Component {
             </div>
           </div>
         </div>
-        <Books books={books} />
+        <Books {...this.props} books={books} />
       </div>
     );
   }

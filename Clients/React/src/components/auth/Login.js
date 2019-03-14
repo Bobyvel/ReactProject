@@ -18,28 +18,25 @@ class Login extends Component {
 
   onChangeHandler(e) {
     this.setState({ [e.target.name]: e.target.value });
-    
   }
   async onSubmitHandler(e) {
     e.preventDefault();
 
     const isValid = loginValidator(this.state.email, this.state.password);
     if (isValid) {
-      try{
       const res = await login(this.state.email, this.state.password);
-      console.log(res)
-      localStorage.setItem("authToken", res.token);
-      localStorage.setItem("username", res.user.username);
-      if (res.user.roles.indexOf("Admin") !== -1) {
-        localStorage.setItem("role", res.user.roles);
+      console.log(res);
+      if (res.success) {
+        localStorage.setItem("authToken", res.token);
+        localStorage.setItem("username", res.user.username);
+        if (res.user.roles.indexOf("Admin") !== -1) {
+          localStorage.setItem("role", res.user.roles);
+        }
+        toastr.success("Login successful");
+        this.props.history.push("/");
+      } else {
+        toastr.error(res.message);
       }
-      toastr.success("Login successful");
-      this.props.history.push("/");
-      }
-      catch(e){
-        toastr.error(e)
-      }
-      
     }
   }
 

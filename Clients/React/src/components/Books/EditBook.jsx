@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import addBookValidator from "../../utils/addBookValidator";
-import { fetchAddBook } from "../../services/book-service";
-
 import toastr from "toastr";
+import addBookValidator from "../../utils/addBookValidator";
+import { editBook } from "../../services/book-service";
 
-class AddBook extends Component {
+class EditBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,6 +18,7 @@ class AddBook extends Component {
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
+    this.id = this.props.match.params.id;
   }
 
   onChangeHandler(e) {
@@ -37,30 +37,47 @@ class AddBook extends Component {
       this.state.price
     );
     if (isValid) {
-      const res = await fetchAddBook(
-        this.state.title,
-        this.state.genres.split(", "),
-        this.state.description,
-        this.state.image,
-        this.state.author,
-        this.state.price
-      );
-      console.log(res);
-      if(res.success){
-        toastr.success("Book is added");
-        this.props.storeHasChanged(this.state);
-        this.props.history.push("/store");
-      }else{
-        toastr.error(res.message);
-      }
-     
+        const res = await editBook(this.id, 
+          this.state.title,
+          this.state.genres.split(", "),
+          this.state.description,
+          this.state.image,
+          this.state.author,
+          this.state.price
+        );
+        console.log(res);
+        if(res.success){
+          toastr.success("Book is edited");
+          this.props.storeHasChanged(this.state);
+          this.props.history.push("/store");
+        }else{
+          toastr.error(res.message);
+        }
+    }
+  }
+
+  UNSAFE_componentWillMount() {
+    //const id = this.props.match.params.id;
+    console.log(this.props.books);
+    const book = this.props.books.find(p => p._id === this.id);
+    console.log(book);
+    if (book) {
+      this.setState({
+        title: book.title,
+        genres: book.genres.join(", "),
+        description: book.description,
+        author: book.author,
+        price: book.price.toFixed(2),
+        image: book.image
+      });
     }
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className="form-wrapper">
-        <h1>Create New Book</h1>
+        <h1>Edit Book</h1>
         <form onSubmit={this.onSubmitHandler}>
           <div className="form-group">
             <label htmlFor="title">Title</label>
@@ -128,11 +145,11 @@ class AddBook extends Component {
               onChange={this.onChangeHandler}
             />
           </div>
-          <input type="submit" value="Create" />
+          <input type="submit" value="Edit" />
         </form>
       </div>
     );
   }
 }
 
-export default AddBook;
+export default EditBook;

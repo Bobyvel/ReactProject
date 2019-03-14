@@ -6,8 +6,15 @@ import Books from "../Books/Books";
 const Home = (props) => {
   const user = localStorage.getItem("username");
 
-  const topRatedBooks = props.books
+  console.log(props)
+  const isLoading = props.isLoading;
+  let topRatedBooks= [];
+  if(!isLoading){
+    topRatedBooks = props.books
       .sort((a, b) => b.likes.length - a.likes.length)
+  }
+  
+  
 
   return (
     <main>
@@ -23,8 +30,10 @@ const Home = (props) => {
         )}
 
         <h2>Top Rated Books</h2>
+        
         <div className="row">
-          <Books books = {topRatedBooks}/>
+        {isLoading && <h3>Loading...</h3>}
+          <Books {...props} books={topRatedBooks}/>
         </div>
       </div>
     </main>

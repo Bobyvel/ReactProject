@@ -45,6 +45,8 @@ class Register extends React.Component {
         localStorage.setItem("authToken", res.token);
         localStorage.setItem("username", res.user.username);
         this.props.history.push("/");
+      }else{
+        toastr.error(res.message);
       }
     }
   }
