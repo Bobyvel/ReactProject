@@ -12,8 +12,8 @@ class Auth {
   }
 
   static isUserAdmin () {
-    let roles = window.localStorage.getItem('roles')
-    if (!roles) {
+    let role = window.localStorage.getItem('role')
+    if (role) {
       return true
     }
 

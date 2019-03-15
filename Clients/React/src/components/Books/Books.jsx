@@ -13,9 +13,11 @@ class Books extends Component {
     this.onDeleteButtonClick = this.onDeleteButtonClick.bind(this);
   }
 
-  onOrderButtonClick () {
+  onOrderButtonClick (e) {
+    const bookID = e.target.value;
+    console.log(bookID)
     if (Auth.isUserAuthenticated()) {
-      this.props.addToCart(this.props.id)
+      this.props.addToCart(bookID)
       this.props.history.push('/cart')
     } else {
       this.props.history.push('/login')
@@ -38,6 +40,10 @@ class Books extends Component {
   render() {
     
     const books = this.props.books;
+    
+    if(books.length === 0){
+      return <h1>Sorry! No books to show.</h1>
+    }
 
     return (
       <div className="card-deck space-top">
@@ -65,6 +71,7 @@ class Books extends Component {
               <button
                 onClick={this.onOrderButtonClick}
                 type="button"
+                value={book._id}
                 className="btn btn-warning float-right btn-sm"
               >
                 Order

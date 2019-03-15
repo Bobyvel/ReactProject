@@ -45,5 +45,27 @@ async function editBook(id, title, genres, description, image, author, price) {
 
   return res.json();
 }
+async function likeBook (id) {
+  console.log(id)
+  const res = await window.fetch(host + `book/like/${id}`, {
+    method: 'POST',
+    headers: {
+      'Authorization': 'bearer ' + Auth.getToken()
+    }
+  })
 
-export { fetchBooks, fetchAddBook, deleteBook, editBook };
+  return res.json()
+}
+
+async function unlikeBook (id) {
+  const res = await window.fetch(host + `book/unlike/${id}`, {
+    method: 'POST',
+    headers: {
+      'Authorization': 'bearer ' + Auth.getToken()
+    }
+  })
+
+  return res.json()
+}
+
+export { fetchBooks, fetchAddBook, deleteBook, editBook, likeBook, unlikeBook };
