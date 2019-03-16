@@ -21,6 +21,8 @@ async function fetchUserOrders() {
       Authorization: "bearer " + Auth.getToken()
     }
   });
+  
+  
   return res.json();
 }
 

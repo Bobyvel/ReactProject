@@ -1,12 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import {MessageStore} from "../MessageStore/MessageStore";
 import Books from "../Books/Books";
+import AcclaimedBooksNews from "../api/remote";
 
 const Home = (props) => {
   const user = localStorage.getItem("username");
 
-  console.log(props)
+  
   const isLoading = props.isLoading;
   let topRatedBooks= [];
   if(!isLoading){
@@ -35,6 +36,7 @@ const Home = (props) => {
         {isLoading && <h3>Loading...</h3>}
           <Books {...props} books={topRatedBooks}/>
         </div>
+        <AcclaimedBooksNews/>
       </div>
     </main>
   );

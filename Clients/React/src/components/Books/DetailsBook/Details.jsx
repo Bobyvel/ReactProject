@@ -7,13 +7,11 @@ class Details extends Component {
     render () {
     const bookId = this.props.match.params.id
     const bookDetais = this.props.books.find(p => p._id === bookId)
-
-    const books = this.props.books;
-    console.log(books)
-    if(books.length === 0){
-      return <h1>Sorry! No books to show.</h1>
+   if (!bookDetais) {
+      return (
+        <h2>No such order</h2>
+      )
     }
-
        
     const username = Auth.getUsername()
 

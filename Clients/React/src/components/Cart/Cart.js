@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import CarInfo from "./CartInfo"
 import { Link } from "react-router-dom"
 import {submitOrder } from "../../services/orderService";
 import CartInfo from "./CartInfo";
@@ -8,12 +7,11 @@ import CartInfo from "./CartInfo";
 class Cart extends Component {
   onCheckoutButtonClick () {
     let books = []
-    for (let element of this.props.cart) {
-      let product = this.props.products.find(p => p._id === element.id)
+    for (let book of this.props.cart) {
       books.push({
-        id: element.id,
-        title: product.title,
-        price: product.price
+        id: book.id,
+        title: book.title,
+        price: book.price
       })
     }
     submitOrder(books)

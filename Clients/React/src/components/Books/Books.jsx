@@ -20,7 +20,7 @@ class Books extends Component {
       this.props.addToCart(bookID)
       this.props.history.push('/cart')
     } else {
-      this.props.history.push('/login')
+      this.props.history.push('/signin')
     }
   }
 
@@ -48,7 +48,7 @@ class Books extends Component {
     return (
       <div className="card-deck space-top">
         {books.map(book => (
-          <div className="card col-4">
+          <div key={book._id} className="card col-4">
             <img
               className="card-img-top card-image"
               src={book.image}

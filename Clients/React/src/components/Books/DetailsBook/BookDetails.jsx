@@ -44,6 +44,7 @@ class Details extends Component {
   render() {
    
     const { bookDetails, username } = this.props;
+    
    
     let buttonText = "Like";
     if (this.state.likes.includes(username) || (bookDetails.likes.includes(username))) {

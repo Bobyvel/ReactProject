@@ -14,7 +14,8 @@ import AddBook from "./components/Books/AddBook";
 import EditBook from "./components/Books/EditBook";
 import Details from "./components/Books/DetailsBook/Details";
 import Cart from "./components/Cart/Cart";
-import Order from "./components/Orders/Order";
+import Orders from "./components/Orders/Orders";
+import OrderDetail from "./components/Orders/OrderDetail";
 
 class App extends Component {
   constructor(props) {
@@ -79,33 +80,8 @@ class App extends Component {
                 <Home
                   {...props}
                   {...this.state}
+                  addToCart={this.addToCart}
                   storeHasChanged={this.storeHasChanged}
-                />
-              )}
-            />
-            <Route path="/signin" exact component={Login} />
-            <Route path="/register" exact component={Register} />
-            <Route
-              path="/cart"
-              component={props => (
-                <Cart addToCart={this.addToCart} removeFromCart={this.removeFromCart}  {...props} {...this.state} />
-              )}
-            />
-            <Route path="/orders" exact component={Order} />
-
-            <AdminRoute
-              path="/admin/create"
-              component={props => (
-                <AddBook {...props} storeHasChanged={this.storeHasChanged} />
-              )}
-            />
-            <AdminRoute
-              path="/admin/edit/:id"
-              component={props => (
-                <EditBook
-                  storeHasChanged={this.storeHasChanged}
-                  {...props}
-                  {...this.state}
                 />
               )}
             />
@@ -128,6 +104,44 @@ class App extends Component {
                   {...props}
                   {...this.state}
                   storeHasChanged={this.storeHasChanged}
+                />
+              )}
+            />
+            <Route path="/signin" exact component={Login} />
+            <Route path="/register" exact component={Register} />
+            <PrivateRoute
+              path="/cart"
+              component={props => (
+                <Cart addToCart={this.addToCart} removeFromCart={this.removeFromCart}  {...props} {...this.state} />
+              )}
+            />
+            <PrivateRoute path="/orders" exact component={Orders} />
+            <PrivateRoute
+              path="/orders/details/:id"
+              exact component={OrderDetail}
+                />
+              )}
+            />
+
+            <AdminRoute
+              path="/admin/create"
+              component={props => (
+                <AddBook {...props} storeHasChanged={this.storeHasChanged} />
+              )}
+            />
+            <AdminRoute
+              path="/admin/edit/:id"
+              component={props => (
+                <EditBook
+                  storeHasChanged={this.storeHasChanged}
+                  {...props}
+                  {...this.state}
+                />
+              )}
+            />
+            <AdminRoute
+              path="/admin/orders/pending"
+              exact component={Orders}
                 />
               )}
             />
