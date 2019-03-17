@@ -45,27 +45,26 @@ async function editBook(id, title, genres, description, image, author, price) {
 
   return res.json();
 }
-async function likeBook (id) {
-  console.log(id)
+async function likeBook(id) {
   const res = await window.fetch(host + `book/like/${id}`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Authorization': 'bearer ' + Auth.getToken()
+      Authorization: "bearer " + Auth.getToken()
     }
-  })
+  });
 
-  return res.json()
+  return res.json();
 }
 
-async function unlikeBook (id) {
+async function unlikeBook(id) {
   const res = await window.fetch(host + `book/unlike/${id}`, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      'Authorization': 'bearer ' + Auth.getToken()
+      Authorization: "bearer " + Auth.getToken()
     }
-  })
+  });
 
-  return res.json()
+  return res.json();
 }
 
 export { fetchBooks, fetchAddBook, deleteBook, editBook, likeBook, unlikeBook };

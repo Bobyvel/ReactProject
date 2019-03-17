@@ -6,13 +6,14 @@ class Details extends Component {
   
     render () {
     const bookId = this.props.match.params.id
+    
     const bookDetais = this.props.books.find(p => p._id === bookId)
    if (!bookDetais) {
       return (
-        <h2>No such order</h2>
+        <h2>No such book</h2>
       )
     }
-       
+     
     const username = Auth.getUsername()
 
     return (
@@ -23,7 +24,7 @@ class Details extends Component {
           </div>
         </div>
         <BookDetails
-          otherProps = {this.props}
+         {...this.props}
           bookDetails={bookDetais}
           username={username}
            />

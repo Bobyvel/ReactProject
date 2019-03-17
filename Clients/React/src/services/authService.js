@@ -31,7 +31,7 @@ async function login (email, password) {
   
     return res.json()
   }
-  
+  //to do logout express session
   function logout() {
     localStorage.clear();
     toastr.success('Logout successful')

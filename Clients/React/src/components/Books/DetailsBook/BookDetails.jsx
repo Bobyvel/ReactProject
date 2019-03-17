@@ -1,56 +1,62 @@
 import React, { Component } from "react";
-import Auth from '../../../utils/auth'
+import Auth from "../../../utils/auth";
 import { likeBook, unlikeBook } from "../../../services/book-service";
-import toastr from "toastr";
 
 class Details extends Component {
   constructor(props) {
     super(props);
-     this.state = {
-      likes: []
+    console.log(1)
+    this.state = {
+      likes: [],
+      buttonText: ""
     };
   }
-  componentDidMount(){
+ componentDidMount() {
+  
+  
+    let buttonText = '';
+    buttonText = this.props.bookDetails.likes.includes(this.props.username)
+      ? (buttonText = "Unlike")
+      : (buttonText = "Like");
     this.setState({
-      likes: this.props.bookDetails.likes
-    })
+      likes: this.props.bookDetails.likes,
+      buttonText: buttonText
+    });
+    
   }
   async onLikeButtonClick(e) {
     e.preventDefault();
-   
-    console.log(this.state.likes);
+       
     const hasLike = this.state.likes.indexOf(this.props.username);
-    console.log(hasLike);
+   
     if (hasLike !== -1) {
-     await unlikeBook(this.props.bookDetails._id);
+      await unlikeBook(this.props.bookDetails._id);
       const newLikes = [...this.state.likes];
       newLikes.splice(hasLike, 1);
-      this.setState({ likes: newLikes });
+      this.setState({ likes: newLikes, buttonText: "Like" });
     } else {
-     await likeBook(this.props.bookDetails._id);
+      await likeBook(this.props.bookDetails._id);
       const newLikes = [...this.state.likes];
       newLikes.push(this.props.username);
-      this.setState({ likes: newLikes });
+      this.setState({ likes: newLikes, buttonText: "Unlike" });
     }
+    this.props.storeHasChanged();
   }
 
   onOrderButtonClick(e) {
-    e.preventDefault();
-    this.props.addToCart(this.props.bookDetails._id);
-    toastr.success('Added to cart');
-    this.props.history.push("/cart");
+    const bookID = this.props.bookDetails._id;
+
+    if (Auth.isUserAuthenticated()) {
+      this.props.addToCart(bookID);
+      this.props.history.push("/cart");
+    } else {
+      this.props.history.push("/signin");
+    }
   }
 
   render() {
-   
-    const { bookDetails, username } = this.props;
-    
-   
-    let buttonText = "Like";
-    if (this.state.likes.includes(username) || (bookDetails.likes.includes(username))) {
-      buttonText = "Unlike";
-    }
-
+    const { bookDetails } = this.props;
+console.log(bookDetails)
     return (
       <div className="row space-top">
         <div className="col-md-4">
@@ -88,12 +94,13 @@ class Details extends Component {
             {this.state.likes.length}
           </p>
           {Auth.isUserAuthenticated() ? (
-          <button
-            className="btn btn-primary btn-sm"
-            onClick={this.onLikeButtonClick.bind(this)}
-          >
-            {buttonText} 
-          </button>) : null}
+            <button
+              className="btn btn-primary btn-sm"
+              onClick={this.onLikeButtonClick.bind(this)}
+            >
+              {this.state.buttonText}
+            </button>
+          ) : null}
           <button
             className="btn btn-warning btn-sm"
             onClick={this.onOrderButtonClick.bind(this)}

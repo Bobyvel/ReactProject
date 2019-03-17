@@ -96,11 +96,6 @@ div.welcome-wrapper p{
     
 
 }
-.row{
-    margin: 40px auto;
-    
-
-}
 
 div.welcome {
     padding: 10px;
@@ -129,7 +124,10 @@ div.welcome p {
     font-size: 18px;
     margin: 25px
 }
-
+.review{
+    background-color: silver;
+    padding: 10px;
+}
 .form-wrapper {
     padding: 1em 0 3em 0;
     width: 60%;

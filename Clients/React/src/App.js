@@ -37,7 +37,6 @@ class App extends Component {
   }
 
   storeHasChanged(bookInfo) {
-    
     if (typeof bookInfo === "string") {
       this.setState(prevState => ({
         books: prevState.books.filter(book => book._id !== bookInfo)
@@ -48,11 +47,10 @@ class App extends Component {
 
     //window.location.reload()
   }
-
   addToCart(id) {
-    const addBookToCart = this.state.books.filter(book => book._id === id)
+    const addBookToCart = this.state.books.filter(book => book._id === id);
     let booksToCart = [...this.state.cart];
-    booksToCart.push(...addBookToCart)
+    booksToCart.push(...addBookToCart);
     this.setState({
       cart: booksToCart
     });
@@ -60,11 +58,10 @@ class App extends Component {
 
   removeFromCart(id) {
     let booksToCart = [...this.state.cart];
-    booksToCart = booksToCart.filter(book => book._id !== id)
+    booksToCart = booksToCart.filter(book => book._id !== id);
     this.setState({
       cart: booksToCart
     });
-    
   }
 
   render() {
@@ -103,6 +100,7 @@ class App extends Component {
                 <Details
                   {...props}
                   {...this.state}
+                  addToCart={this.addToCart}
                   storeHasChanged={this.storeHasChanged}
                 />
               )}
@@ -112,17 +110,21 @@ class App extends Component {
             <PrivateRoute
               path="/cart"
               component={props => (
-                <Cart addToCart={this.addToCart} removeFromCart={this.removeFromCart}  {...props} {...this.state} />
+                <Cart
+                  addToCart={this.addToCart}
+                  removeFromCart={this.removeFromCart}
+                  {...props}
+                  {...this.state}
+                />
               )}
             />
             <PrivateRoute path="/orders" exact component={Orders} />
             <PrivateRoute
               path="/orders/details/:id"
-              exact component={OrderDetail}
-                />
-              )}
+              exact
+              component={OrderDetail}
             />
-
+            )} />
             <AdminRoute
               path="/admin/create"
               component={props => (
@@ -139,12 +141,8 @@ class App extends Component {
                 />
               )}
             />
-            <AdminRoute
-              path="/admin/orders/pending"
-              exact component={Orders}
-                />
-              )}
-            />
+            <AdminRoute path="/admin/orders/pending" exact component={Orders} />
+            )} />
             <Route component={NotFound} />
           </Switch>
           <Footer />

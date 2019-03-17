@@ -56,6 +56,8 @@ class Register extends React.Component {
       <div className="form-wrapper">
         <h1>Register</h1>
         <form onSubmit={this.onSubmitHandler}>
+          <div className="form-group">
+          <label htmlFor="email">E-mail</label>
           <input
             type="text"
             name="email"
@@ -64,6 +66,9 @@ class Register extends React.Component {
             value={this.state.email}
             onChange={this.onChangeHandler}
           />
+          </div>
+          <div className="form-group">
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             name="username"
@@ -72,6 +77,9 @@ class Register extends React.Component {
             value={this.state.username}
             onChange={this.onChangeHandler}
           />
+          </div>
+          <div className="form-group">
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"
@@ -80,6 +88,9 @@ class Register extends React.Component {
             value={this.state.password}
             onChange={this.onChangeHandler}
           />
+          </div>
+          <div className="form-group">
+          <label htmlFor="confirmPassword">ConfirmPassword</label>
           <input
             type="password"
             name="confirmPassword"
@@ -88,6 +99,7 @@ class Register extends React.Component {
             value={this.state.confirmPassword}
             onChange={this.onChangeHandler}
           />
+          </div>
           <input type="submit" value="Register" />
         </form>
       </div>

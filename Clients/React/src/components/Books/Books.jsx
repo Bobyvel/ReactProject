@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import Auth from "../../utils/auth";
 import { deleteBook } from "../../services/book-service";
@@ -13,42 +13,41 @@ class Books extends Component {
     this.onDeleteButtonClick = this.onDeleteButtonClick.bind(this);
   }
 
-  onOrderButtonClick (e) {
+  onOrderButtonClick(e) {
     const bookID = e.target.value;
-    console.log(bookID)
+
     if (Auth.isUserAuthenticated()) {
-      this.props.addToCart(bookID)
-      this.props.history.push('/cart')
+      this.props.addToCart(bookID);
+      this.props.history.push("/cart");
     } else {
-      this.props.history.push('/signin')
+      this.props.history.push("/signin");
     }
   }
 
-  async onDeleteButtonClick (e) {
+  async onDeleteButtonClick(e) {
     const bookID = e.target.value;
     const res = await deleteBook(bookID);
-    if(res.success){
+    if (res.success) {
       toastr.success("Book is deleted");
       this.props.storeHasChanged(bookID);
       this.props.history.push("/store");
-    }else{
+    } else {
       toastr.error(res.message);
     }
-        
   }
 
   render() {
-    
     const books = this.props.books;
-    
-    if(books.length === 0){
-      return <h1>Sorry! No books to show.</h1>
+
+    if (books.length === 0) {
+      return <h1>Sorry! No books to show.</h1>;
     }
 
     return (
-      <div className="card-deck space-top">
+      <Fragment>
         {books.map(book => (
           <div key={book._id} className="card col-4">
+            
             <img
               className="card-img-top card-image"
               src={book.image}
@@ -98,7 +97,7 @@ class Books extends Component {
             ) : null}
           </div>
         ))}
-      </div>
+      </Fragment>
     );
   }
 }

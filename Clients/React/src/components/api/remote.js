@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import { Link } from "react-dom";
 
 class AcclaimedBooksNews extends Component {
   _isMounted = false;
@@ -8,7 +7,8 @@ class AcclaimedBooksNews extends Component {
     super(props);
 
     this.state = {
-      news: []
+      news: [],
+      isLoading: true
     };
   }
 
@@ -20,8 +20,12 @@ class AcclaimedBooksNews extends Component {
       .then(res => res.json())
       .then(news => {
         if (this._isMounted) {
-          this.setState({ news });
+          this.setState({ news, isLoading: false });
         }
+      })
+      .catch(error => {
+        console.log(error);
+        this.setState({ isLoading: false });
       });
   }
   componentWillUnmount() {
@@ -29,28 +33,29 @@ class AcclaimedBooksNews extends Component {
   }
 
   render() {
-    if (this.state.news.length < 1) {
-      return <h1>No rewies</h1>;
+    if (this.state.isLoading) {
+      return <h1>Loading...</h1>;
     }
-    console.log(this.state.news);
-    const reviews = this.state.news
-      .sort((a, b) => new Date(b.date) - new Date(a.date))
-      .slice(0, 4);
+    if (this.state.news.length < 1) {
+      return <h1>No reviews</h1>;
+    }
+
+    const reviews = this.state.news.slice(0, 4);
     return (
       <Fragment>
-        <h2>Reviews by Critics</h2>
-        <div class="row">
-          {reviews.map(review => (
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">{review.title}</h5>
-                  <p class="card-text">{review.author}</p>
-                  <p class="card-text">{review.review_snippet}</p>
+        <h2 className="review">Reviews by Critics</h2>
+        <div className="row">
+          {reviews.map((review, i) => (
+            <div key={i} className="col-sm-4">
+              <div className="card">
+                <div className="card-body">
+                  <h5 className="card-title">{review.title}</h5>
+                  <p className="card-text">{review.author}</p>
+                  <p className="card-text">{review.review_snippet}</p>
                   <a
                     href={`${review.review_link}`}
                     type=""
-                    class="btn btn-primary"
+                    className="btn btn-primary"
                   >
                     Read the review
                   </a>
