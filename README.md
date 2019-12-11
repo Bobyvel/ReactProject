@@ -1,12 +1,28 @@
+# ReactProject
+
+### Description
+
 BookStore project with React, Express, MongoDB
 
+### Tech
+
+ReactProject uses a number of open source projects to work:
+* [MongoDB](https://www.mongodb.com) - Free and open-source cross-platform document-oriented database
+* [Mongoose](http://mongoosejs.com/index.html) - Elegant MongoDB object modeling for NodeJS
+* [NodeJS](https://nodejs.org/en/) - Evented I/O for the backend
+* [ExpressJS](https://expressjs.com) - Fast, unopinionated, minimalist web framework for NodeJS
+* [JSONWebToken](https://jwt.io) - Used for authorization
+* [React](https://reactjs.org) - User Interface (UI) library
+
+### Installation
 
 STARTING SERVER: on terminal \Servers folder, command: node index
 
 STARTING React: on terminal \Clients\React folder, command: npm start
 
---Anonymous users--
+### Features
 
+--Anonymous users--
 HOME PAGE
 Anyone can view top rated books, to view their details and follow links from external API for reviews.
 If user want to order is redirected to login form.
